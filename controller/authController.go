@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,7 +22,6 @@ func NewAuthController() AuthController {
 	return &authController{}
 }
 func (c *authController) Login(ctx *gin.Context) {
-	fmt.Printf("masuk")
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "masuk routing login",
 	})

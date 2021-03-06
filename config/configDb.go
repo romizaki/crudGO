@@ -20,13 +20,14 @@ func SetupDbConnection() *gorm.DB {
 	dbPass := os.Getenv("DB_PASS")
 	dbHost := os.Getenv("DB_HOST")
 	dbName := os.Getenv("DB_NAME")
-	// dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
+	// dsn := "romizaki:romizaki@tcp(127.0.0.1:3306)/crud_go?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local", dbUser, dbPass, dbHost, dbName)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
+		fmt.Println(err)
 		panic("Failed to create a connection to database")
 	}
-	// db.AutoMigrate(&entity.Book{}, &entity.User{})
+	// db.AutoMigrate(&entity.Item{}, &entity.Order{})
 	return db
 }
 
@@ -34,7 +35,7 @@ func SetupDbConnection() *gorm.DB {
 func CloseDbConnection(db *gorm.DB) {
 	dbSQL, err := db.DB()
 	if err != nil {
-		panic("Failed to close connection from database")
+		panic("Failed to close connection database")
 	}
 	dbSQL.Close()
 }
